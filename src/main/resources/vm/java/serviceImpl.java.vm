@@ -1,0 +1,197 @@
+package ${packageName}.service.impl;
+
+import java.util.List;
+import java.util.Arrays;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.conditions.query.QueryChainWrapper;
+import java.util.Map;
+#foreach ($column in $columns)
+#if($column.javaField == 'createTime' || $column.javaField == 'updateTime')
+import com.ruoyi.common.utils.DateUtils;
+#break
+#end
+#end
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+#if($table.sub)
+import java.util.ArrayList;
+import com.ruoyi.common.utils.StringUtils;
+import org.springframework.transaction.annotation.Transactional;
+import ${packageName}.mapper.${subClassName}Mapper;
+import ${packageName}.domain.${subClassName};
+#end
+import com.ruoyi.common.utils.IdGenerator;
+import ${packageName}.mapper.${ClassName}Mapper;
+import ${packageName}.domain.${ClassName};
+import ${packageName}.service.I${ClassName}Service;
+
+/**
+ * ${functionName}Service业务层处理
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+@Service
+public class ${ClassName}ServiceImpl implements I${ClassName}Service
+{
+    @Autowired
+    private ${ClassName}Mapper ${className}Mapper;
+#if($table.sub)
+    @Autowired
+    private ${subClassName}Mapper ${subclassName}Mapper;
+#end
+
+    /**
+     * 查询${functionName}
+     *
+     * @param ${pkColumn.javaField} ${functionName}主键
+     * @return ${functionName}
+     */
+    @Override
+    public ${ClassName} select${ClassName}By${pkColumn.capJavaField}(${pkColumn.javaType} ${pkColumn.javaField})
+    {
+        ${ClassName} ${className} = ${className}Mapper.selectById(${pkColumn.javaField});
+        #if($table.sub)
+        List<${subClassName}> ${subclassName}List = new QueryChainWrapper<>(${subclassName}Mapper)
+                .eq("${pkColumn.columnName}" , ${pkColumn.javaField})
+                .list();
+        ${className}.set${subClassName}List(${subclassName}List);
+        #end
+        return ${className};
+    }
+
+    /**
+     * 查询${functionName}列表
+     *
+     * @param ${className} ${functionName}
+     * @return ${functionName}
+     */
+    @Override
+    public List<${ClassName}> select${ClassName}List(${ClassName} ${className})
+    {
+        QueryWrapper<${ClassName}> wrapper = Wrappers.query();
+        #foreach($column in $columns)
+            #set($queryType=$column.queryType)
+            #set($javaField=$column.javaField)
+            #set($columnName=$column.columnName)
+            #set($AttrName=$column.javaField.substring(0,1).toUpperCase() + ${column.javaField.substring(1)})
+            #if($column.query)
+                #if($column.queryType == "EQ")
+        wrapper.eq(${className}.get$AttrName() != null, "$columnName", ${className}.get$AttrName());
+                #elseif($queryType == "NE")
+        wrapper.ne(${className}.get$AttrName() != null, "$columnName", ${className}.get$AttrName());
+                #elseif($queryType == "GT")
+        wrapper.gt(${className}.get$AttrName() != null, "$columnName", ${className}.get$AttrName());
+                #elseif($queryType == "GTE")
+        wrapper.ge(${className}.get$AttrName() != null, "$columnName", ${className}.get$AttrName());
+                #elseif($queryType == "LT")
+        wrapper.lt(${className}.get$AttrName() != null, "$columnName", ${className}.get$AttrName());
+                #elseif($queryType == "LTE")
+        wrapper.le(${className}.get$AttrName() != null, "$columnName", ${className}.get$AttrName());
+                #elseif($queryType == "LIKE")
+        wrapper.like(${className}.get$AttrName() != null, "$columnName", ${className}.get$AttrName());
+                #elseif($queryType == "BETWEEN")
+        Map<String,Object> params = ${className}.getParams();
+        if (params != null && params.get("begin$AttrName") != null && params.get("end$AttrName") != null)
+        {
+            wrapper.apply("$columnName >= TO_DATE({0}, 'yyyy-MM-dd')", params.get("begin$AttrName"));
+            wrapper.apply("$columnName <= TO_DATE({0}, 'yyyy-MM-dd')", params.get("end$AttrName"));
+        }
+                #end
+            #end
+        #end
+        return ${className}Mapper.selectList(wrapper);
+    }
+
+
+    #set($pkAttrName=${pkColumn.javaField.substring(0,1).toUpperCase()} + ${pkColumn.javaField.substring(1)})
+
+    /**
+     * 新增${functionName}
+     *
+     * @param ${className} ${functionName}
+     * @return 结果
+     */
+#if($table.sub)
+    @Transactional
+#end
+    @Override
+    public int insert${ClassName}(${ClassName} ${className})
+    {
+        ${className}.set${pkAttrName}(IdGenerator.generateId());
+        #if($table.sub)
+        for (${subClassName} ${subclassName} : ${className}.get${subClassName}List())
+        {
+            ${subclassName}.set${pkAttrName}(${className}.get${pkAttrName}());
+            ${subclassName}Mapper.insert(${subclassName});
+        }
+        #end
+        return ${className}Mapper.insert(${className});
+    }
+
+    /**
+     * 修改${functionName}
+     *
+     * @param ${className} ${functionName}
+     * @return 结果
+     */
+#if($table.sub)
+    @Transactional
+#end
+    @Override
+    public int update${ClassName}(${ClassName} ${className})
+    {
+        #if($table.sub)
+        QueryWrapper<${subClassName}> wrapper = Wrappers.query();
+        wrapper.eq("${pkColumn.columnName}" , ${className}.get${pkAttrName}());
+        ${subclassName}Mapper.delete(wrapper);
+        for (${subClassName} ${subclassName} : ${className}.get${subClassName}List())
+        {
+            ${subclassName}.set${pkAttrName}(${className}.get${pkAttrName}());
+            ${subclassName}Mapper.insert(${subclassName});
+        }
+        #end
+        return ${className}Mapper.updateById(${className});
+    }
+
+    /**
+     * 批量删除${functionName}
+     *
+     * @param ${pkColumn.javaField}s 需要删除的${functionName}主键
+     * @return 结果
+     */
+#if($table.sub)
+    @Transactional
+#end
+    @Override
+    public int delete${ClassName}By${pkColumn.capJavaField}s(${pkColumn.javaType}[] ${pkColumn.javaField}s)
+    {
+        #if($table.sub)
+        QueryWrapper<${subClassName}> wrapper = Wrappers.query();
+        wrapper.in("${pkColumn.columnName}" , Arrays.asList(${pkColumn.javaField}s));
+        ${subclassName}Mapper.delete(wrapper);
+        #end
+        return ${className}Mapper.deleteBatchIds(Arrays.asList(${pkColumn.javaField}s));
+    }
+
+    /**
+     * 删除${functionName}信息
+     *
+     * @param ${pkColumn.javaField} ${functionName}主键
+     * @return 结果
+     */
+#if($table.sub)
+    @Transactional
+#end
+    @Override
+    public int delete${ClassName}By${pkColumn.capJavaField}(${pkColumn.javaType} ${pkColumn.javaField})
+    {
+        #if($table.sub)
+        QueryWrapper<${subClassName}> wrapper = Wrappers.query();
+        wrapper.eq("${pkColumn.columnName}" , ${pkColumn.javaField});
+        ${subclassName}Mapper.delete(wrapper);
+        #end
+        return ${className}Mapper.deleteById(${pkColumn.javaField});
+    }
+}

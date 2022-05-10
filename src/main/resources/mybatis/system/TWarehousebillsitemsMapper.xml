@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.mapper.TWarehousebillsitemsMapper">
+
+    <resultMap type="TWarehousebillsitems" id="TWarehousebillsitemsResult">
+        <result property="fId"    column="f_id"    />
+        <result property="fPid"    column="f_pid"    />
+        <result property="fBillno"    column="f_billno"    />
+        <result property="fGoodsid"    column="f_goodsid"    />
+        <result property="fMblno"    column="f_mblno"    />
+        <result property="fOriginalbilldate"    column="f_originalbilldate"    />
+        <result property="fBsdate"    column="f_bsdate"    />
+        <result property="fBillingway"    column="f_billingway"    />
+        <result property="fQty"    column="f_qty"    />
+        <result property="fBillstatus"    column="f_billstatus"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="fAmt"    column="f_amt"    />
+        <result property="fBilltype"    column="f_billtype"    />
+    </resultMap>
+
+    <sql id="selectTWarehousebillsitemsVo">
+        select f_id, f_pid, f_billno, f_goodsid, f_mblno, f_originalbilldate, f_bsdate, f_billingway, f_qty, f_billstatus, del_flag, create_by, create_time, update_by, update_time, remark, f_amt, f_billtype from t_warehousebillsitems
+    </sql>
+
+    <select id="selectTWarehousebillsitemsList" parameterType="TWarehousebillsitems" resultMap="TWarehousebillsitemsResult">
+        <include refid="selectTWarehousebillsitemsVo"/>
+        <where>
+            <if test="fPid != null "> and f_pid = #{fPid}</if>
+            <if test="fBillno != null  and fBillno != ''"> and f_billno = #{fBillno}</if>
+            <if test="fGoodsid != null "> and f_goodsid = #{fGoodsid}</if>
+            <if test="fMblno != null  and fMblno != ''"> and f_mblno = #{fMblno}</if>
+            <if test="fOriginalbilldate != null "> and f_originalbilldate = #{fOriginalbilldate}</if>
+            <if test="fBsdate != null "> and f_bsdate = #{fBsdate}</if>
+            <if test="fBillingway != null "> and f_billingway = #{fBillingway}</if>
+            <if test="fQty != null "> and f_qty = #{fQty}</if>
+            <if test="fBillstatus != null "> and f_billstatus = #{fBillstatus}</if>
+            <if test="fAmt != null "> and f_amt = #{fAmt}</if>
+            <if test="fBilltype != null  and fBilltype != ''"> and f_billtype = #{fBilltype}</if>
+        </where>
+    </select>
+
+    <select id="selectTWarehousebillsitemsByFId" parameterType="Long" resultMap="TWarehousebillsitemsResult">
+        <include refid="selectTWarehousebillsitemsVo"/>
+        where f_id = #{fId}
+    </select>
+
+    <insert id="insertTWarehousebillsitems" parameterType="TWarehousebillsitems">
+        <selectKey keyProperty="fId" resultType="long" order="BEFORE">
+            SELECT SEQ_SYS_USER as fId FROM DUAL
+        </selectKey>
+        insert into t_warehousebillsitems
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fId != null">f_id,</if>
+            <if test="fPid != null">f_pid,</if>
+            <if test="fBillno != null">f_billno,</if>
+            <if test="fGoodsid != null">f_goodsid,</if>
+            <if test="fMblno != null">f_mblno,</if>
+            <if test="fOriginalbilldate != null">f_originalbilldate,</if>
+            <if test="fBsdate != null">f_bsdate,</if>
+            <if test="fBillingway != null">f_billingway,</if>
+            <if test="fQty != null">f_qty,</if>
+            <if test="fBillstatus != null">f_billstatus,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="fAmt != null">f_amt,</if>
+            <if test="fBilltype != null">f_billtype,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fId != null">#{fId},</if>
+            <if test="fPid != null">#{fPid},</if>
+            <if test="fBillno != null">#{fBillno},</if>
+            <if test="fGoodsid != null">#{fGoodsid},</if>
+            <if test="fMblno != null">#{fMblno},</if>
+            <if test="fOriginalbilldate != null">#{fOriginalbilldate},</if>
+            <if test="fBsdate != null">#{fBsdate},</if>
+            <if test="fBillingway != null">#{fBillingway},</if>
+            <if test="fQty != null">#{fQty},</if>
+            <if test="fBillstatus != null">#{fBillstatus},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="fAmt != null">#{fAmt},</if>
+            <if test="fBilltype != null">#{fBilltype},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTWarehousebillsitems" parameterType="TWarehousebillsitems">
+        update t_warehousebillsitems
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fPid != null">f_pid = #{fPid},</if>
+            <if test="fBillno != null">f_billno = #{fBillno},</if>
+            <if test="fGoodsid != null">f_goodsid = #{fGoodsid},</if>
+            <if test="fMblno != null">f_mblno = #{fMblno},</if>
+            <if test="fOriginalbilldate != null">f_originalbilldate = #{fOriginalbilldate},</if>
+            <if test="fBsdate != null">f_bsdate = #{fBsdate},</if>
+            <if test="fBillingway != null">f_billingway = #{fBillingway},</if>
+            <if test="fQty != null">f_qty = #{fQty},</if>
+            <if test="fBillstatus != null">f_billstatus = #{fBillstatus},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="fAmt != null">f_amt = #{fAmt},</if>
+            <if test="fBilltype != null">f_billtype = #{fBilltype},</if>
+        </trim>
+        where f_id = #{fId}
+    </update>
+
+    <delete id="deleteTWarehousebillsitemsByFId" parameterType="Long">
+        delete from t_warehousebillsitems where f_id = #{fId}
+    </delete>
+
+    <delete id="deleteTWarehousebillsitemsByFIds" parameterType="String">
+        delete from t_warehousebillsitems where f_id in
+        <foreach item="fId" collection="array" open="(" separator="," close=")">
+            #{fId}
+        </foreach>
+    </delete>
+</mapper>

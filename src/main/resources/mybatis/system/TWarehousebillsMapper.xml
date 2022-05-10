@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.mapper.TWarehousebillsMapper">
+
+    <resultMap type="TWarehousebills" id="TWarehousebillsResult">
+        <result property="fId"    column="f_id"    />
+        <result property="fContacts"    column="f_contacts"    />
+        <result property="fTel"    column="f_tel"    />
+        <result property="fCorpid"    column="f_corpid"    />
+        <result property="fWarehouseid"    column="f_warehouseid"    />
+        <result property="fStorekeeper"    column="f_storekeeper"    />
+        <result property="fChargedate"    column="f_chargedate"    />
+        <result property="fBsdate"    column="f_bsdate"    />
+        <result property="fBillingway"    column="f_billingway"    />
+        <result property="fTrademodeid"    column="f_trademodeid"    />
+        <result property="fSbu"    column="f_sbu"    />
+        <result property="fFeetunit"    column="f_feetunit"    />
+        <result property="fMblno"    column="f_mblno"    />
+        <result property="fBilltype"    column="f_billtype"    />
+        <result property="fBillstatus"    column="f_billstatus"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="fServiceitems"    column="f_serviceitems"    />
+        <result property="fInvoceobj"    column="f_invoceobj"    />
+        <result property="fShippername"    column="f_shippername"    />
+        <result property="fShipperattn"    column="f_shipperattn"    />
+        <result property="fShippertel"    column="f_shippertel"    />
+        <result property="fConsigneername"    column="f_consigneername"    />
+        <result property="fConsigneeattn"    column="f_consigneeattn"    />
+        <result property="fConsigneetel"    column="f_consigneetel"    />
+        <result property="fInsurance"    column="f_insurance"    />
+        <result property="fInsuranceamt"    column="f_insuranceamt"    />
+        <result property="fPaymode"    column="f_paymode"    />
+        <result property="fMoney"    column="f_money"    />
+        <result property="fPurchase"    column="f_purchase"    />
+        <result property="fReason"    column="f_reason"    />
+    </resultMap>
+
+    <sql id="selectTWarehousebillsVo">
+        select f_id, f_contacts, f_tel, f_corpid, f_warehouseid, f_storekeeper, f_chargedate, f_bsdate, f_billingway, f_trademodeid, f_sbu, f_feetunit, f_mblno, f_billtype, f_billstatus, del_flag, create_by, create_time, update_by, update_time, remark, f_serviceitems, f_invoceobj, f_shippername, f_shipperattn, f_shippertel, f_consigneername, f_consigneeattn, f_consigneetel, f_insurance, f_insuranceamt, f_paymode, f_money, f_purchase, f_reason from t_warehousebills
+    </sql>
+
+    <select id="selectTWarehousebillsList" parameterType="TWarehousebills" resultMap="TWarehousebillsResult">
+        <include refid="selectTWarehousebillsVo"/>
+        <where>
+            <if test="fContacts != null  and fContacts != ''"> and f_contacts = #{fContacts}</if>
+            <if test="fTel != null  and fTel != ''"> and f_tel = #{fTel}</if>
+            <if test="fCorpid != null "> and f_corpid = #{fCorpid}</if>
+            <if test="fWarehouseid != null "> and f_warehouseid = #{fWarehouseid}</if>
+            <if test="fStorekeeper != null  and fStorekeeper != ''"> and f_storekeeper = #{fStorekeeper}</if>
+            <if test="fChargedate != null "> and f_chargedate = #{fChargedate}</if>
+            <if test="fBsdate != null "> and f_bsdate = #{fBsdate}</if>
+            <if test="fBillingway != null "> and f_billingway = #{fBillingway}</if>
+            <if test="fTrademodeid != null "> and f_trademodeid = #{fTrademodeid}</if>
+            <if test="fSbu != null "> and f_sbu = #{fSbu}</if>
+            <if test="fFeetunit != null  and fFeetunit != ''"> and f_feetunit = #{fFeetunit}</if>
+            <if test="fMblno != null  and fMblno != ''"> and f_mblno = #{fMblno}</if>
+            <if test="fBilltype != null  and fBilltype != ''"> and f_billtype = #{fBilltype}</if>
+            <if test="fBillstatus != null "> and f_billstatus = #{fBillstatus}</if>
+            <if test="fServiceitems != null  and fServiceitems != ''"> and f_serviceitems = #{fServiceitems}</if>
+            <if test="fInvoceobj != null  and fInvoceobj != ''"> and f_invoceobj = #{fInvoceobj}</if>
+            <if test="fShippername != null  and fShippername != ''"> and f_shippername like concat(concat('%', #{fShippername}), '%')</if>
+            <if test="fShipperattn != null  and fShipperattn != ''"> and f_shipperattn = #{fShipperattn}</if>
+            <if test="fShippertel != null  and fShippertel != ''"> and f_shippertel = #{fShippertel}</if>
+            <if test="fConsigneername != null  and fConsigneername != ''"> and f_consigneername like concat(concat('%', #{fConsigneername}), '%')</if>
+            <if test="fConsigneeattn != null  and fConsigneeattn != ''"> and f_consigneeattn = #{fConsigneeattn}</if>
+            <if test="fConsigneetel != null  and fConsigneetel != ''"> and f_consigneetel = #{fConsigneetel}</if>
+            <if test="fInsurance != null  and fInsurance != ''"> and f_insurance = #{fInsurance}</if>
+            <if test="fInsuranceamt != null "> and f_insuranceamt = #{fInsuranceamt}</if>
+            <if test="fPaymode != null "> and f_paymode = #{fPaymode}</if>
+            <if test="fMoney != null "> and f_money = #{fMoney}</if>
+            <if test="fPurchase != null "> and f_purchase = #{fPurchase}</if>
+            <if test="fReason != null  and fReason != ''"> and f_reason = #{fReason}</if>
+        </where>
+    </select>
+
+    <select id="selectTWarehousebillsByFId" parameterType="Long" resultMap="TWarehousebillsResult">
+        <include refid="selectTWarehousebillsVo"/>
+        where f_id = #{fId}
+    </select>
+
+    <insert id="insertTWarehousebills" parameterType="TWarehousebills">
+        <selectKey keyProperty="fId" resultType="long" order="BEFORE">
+            SELECT SEQ_SYS_USER as fId FROM DUAL
+        </selectKey>
+        insert into t_warehousebills
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fId != null">f_id,</if>
+            <if test="fContacts != null">f_contacts,</if>
+            <if test="fTel != null">f_tel,</if>
+            <if test="fCorpid != null">f_corpid,</if>
+            <if test="fWarehouseid != null">f_warehouseid,</if>
+            <if test="fStorekeeper != null">f_storekeeper,</if>
+            <if test="fChargedate != null">f_chargedate,</if>
+            <if test="fBsdate != null">f_bsdate,</if>
+            <if test="fBillingway != null">f_billingway,</if>
+            <if test="fTrademodeid != null">f_trademodeid,</if>
+            <if test="fSbu != null">f_sbu,</if>
+            <if test="fFeetunit != null">f_feetunit,</if>
+            <if test="fMblno != null">f_mblno,</if>
+            <if test="fBilltype != null">f_billtype,</if>
+            <if test="fBillstatus != null">f_billstatus,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="fServiceitems != null">f_serviceitems,</if>
+            <if test="fInvoceobj != null">f_invoceobj,</if>
+            <if test="fShippername != null">f_shippername,</if>
+            <if test="fShipperattn != null">f_shipperattn,</if>
+            <if test="fShippertel != null">f_shippertel,</if>
+            <if test="fConsigneername != null">f_consigneername,</if>
+            <if test="fConsigneeattn != null">f_consigneeattn,</if>
+            <if test="fConsigneetel != null">f_consigneetel,</if>
+            <if test="fInsurance != null">f_insurance,</if>
+            <if test="fInsuranceamt != null">f_insuranceamt,</if>
+            <if test="fPaymode != null">f_paymode,</if>
+            <if test="fMoney != null">f_money,</if>
+            <if test="fPurchase != null">f_purchase,</if>
+            <if test="fReason != null">f_reason,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fId != null">#{fId},</if>
+            <if test="fContacts != null">#{fContacts},</if>
+            <if test="fTel != null">#{fTel},</if>
+            <if test="fCorpid != null">#{fCorpid},</if>
+            <if test="fWarehouseid != null">#{fWarehouseid},</if>
+            <if test="fStorekeeper != null">#{fStorekeeper},</if>
+            <if test="fChargedate != null">#{fChargedate},</if>
+            <if test="fBsdate != null">#{fBsdate},</if>
+            <if test="fBillingway != null">#{fBillingway},</if>
+            <if test="fTrademodeid != null">#{fTrademodeid},</if>
+            <if test="fSbu != null">#{fSbu},</if>
+            <if test="fFeetunit != null">#{fFeetunit},</if>
+            <if test="fMblno != null">#{fMblno},</if>
+            <if test="fBilltype != null">#{fBilltype},</if>
+            <if test="fBillstatus != null">#{fBillstatus},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="fServiceitems != null">#{fServiceitems},</if>
+            <if test="fInvoceobj != null">#{fInvoceobj},</if>
+            <if test="fShippername != null">#{fShippername},</if>
+            <if test="fShipperattn != null">#{fShipperattn},</if>
+            <if test="fShippertel != null">#{fShippertel},</if>
+            <if test="fConsigneername != null">#{fConsigneername},</if>
+            <if test="fConsigneeattn != null">#{fConsigneeattn},</if>
+            <if test="fConsigneetel != null">#{fConsigneetel},</if>
+            <if test="fInsurance != null">#{fInsurance},</if>
+            <if test="fInsuranceamt != null">#{fInsuranceamt},</if>
+            <if test="fPaymode != null">#{fPaymode},</if>
+            <if test="fMoney != null">#{fMoney},</if>
+            <if test="fPurchase != null">#{fPurchase},</if>
+            <if test="fReason != null">#{fReason},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTWarehousebills" parameterType="TWarehousebills">
+        update t_warehousebills
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fContacts != null">f_contacts = #{fContacts},</if>
+            <if test="fTel != null">f_tel = #{fTel},</if>
+            <if test="fCorpid != null">f_corpid = #{fCorpid},</if>
+            <if test="fWarehouseid != null">f_warehouseid = #{fWarehouseid},</if>
+            <if test="fStorekeeper != null">f_storekeeper = #{fStorekeeper},</if>
+            <if test="fChargedate != null">f_chargedate = #{fChargedate},</if>
+            <if test="fBsdate != null">f_bsdate = #{fBsdate},</if>
+            <if test="fBillingway != null">f_billingway = #{fBillingway},</if>
+            <if test="fTrademodeid != null">f_trademodeid = #{fTrademodeid},</if>
+            <if test="fSbu != null">f_sbu = #{fSbu},</if>
+            <if test="fFeetunit != null">f_feetunit = #{fFeetunit},</if>
+            <if test="fMblno != null">f_mblno = #{fMblno},</if>
+            <if test="fBilltype != null">f_billtype = #{fBilltype},</if>
+            <if test="fBillstatus != null">f_billstatus = #{fBillstatus},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="fServiceitems != null">f_serviceitems = #{fServiceitems},</if>
+            <if test="fInvoceobj != null">f_invoceobj = #{fInvoceobj},</if>
+            <if test="fShippername != null">f_shippername = #{fShippername},</if>
+            <if test="fShipperattn != null">f_shipperattn = #{fShipperattn},</if>
+            <if test="fShippertel != null">f_shippertel = #{fShippertel},</if>
+            <if test="fConsigneername != null">f_consigneername = #{fConsigneername},</if>
+            <if test="fConsigneeattn != null">f_consigneeattn = #{fConsigneeattn},</if>
+            <if test="fConsigneetel != null">f_consigneetel = #{fConsigneetel},</if>
+            <if test="fInsurance != null">f_insurance = #{fInsurance},</if>
+            <if test="fInsuranceamt != null">f_insuranceamt = #{fInsuranceamt},</if>
+            <if test="fPaymode != null">f_paymode = #{fPaymode},</if>
+            <if test="fMoney != null">f_money = #{fMoney},</if>
+            <if test="fPurchase != null">f_purchase = #{fPurchase},</if>
+            <if test="fReason != null">f_reason = #{fReason},</if>
+        </trim>
+        where f_id = #{fId}
+    </update>
+
+    <delete id="deleteTWarehousebillsByFId" parameterType="Long">
+        delete from t_warehousebills where f_id = #{fId}
+    </delete>
+
+    <delete id="deleteTWarehousebillsByFIds" parameterType="String">
+        delete from t_warehousebills where f_id in
+        <foreach item="fId" collection="array" open="(" separator="," close=")">
+            #{fId}
+        </foreach>
+    </delete>
+</mapper>

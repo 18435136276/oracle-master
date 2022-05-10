@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.mapper.TWarehouseMapper">
+
+    <resultMap type="TWarehouse" id="TWarehouseResult">
+        <result property="fId"    column="f_id"    />
+        <result property="fNo"    column="f_no"    />
+        <result property="fName"    column="f_name"    />
+        <result property="fAddr"    column="f_addr"    />
+        <result property="fTotalgross"    column="f_totalgross"    />
+        <result property="fContacts"    column="f_contacts"    />
+        <result property="fTel"    column="f_tel"    />
+        <result property="fStatus"    column="f_status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectTWarehouseVo">
+        select f_id, f_no, f_name, f_addr, f_totalgross, f_contacts, f_tel, f_status, del_flag, create_by, create_time, update_by, update_time, remark from t_warehouse
+    </sql>
+
+    <select id="selectTWarehouseList" parameterType="TWarehouse" resultMap="TWarehouseResult">
+        <include refid="selectTWarehouseVo"/>
+        <where>
+            <if test="fNo != null  and fNo != ''"> and f_no = #{fNo}</if>
+            <if test="fName != null  and fName != ''"> and f_name like concat(concat('%', #{fName}), '%')</if>
+            <if test="fAddr != null  and fAddr != ''"> and f_addr = #{fAddr}</if>
+            <if test="fTotalgross != null "> and f_totalgross = #{fTotalgross}</if>
+            <if test="fContacts != null  and fContacts != ''"> and f_contacts = #{fContacts}</if>
+            <if test="fTel != null  and fTel != ''"> and f_tel = #{fTel}</if>
+            <if test="fStatus != null  and fStatus != ''"> and f_status = #{fStatus}</if>
+        </where>
+    </select>
+
+    <select id="selectTWarehouseByFId" parameterType="Long" resultMap="TWarehouseResult">
+        <include refid="selectTWarehouseVo"/>
+        where f_id = #{fId}
+    </select>
+
+    <insert id="insertTWarehouse" parameterType="TWarehouse">
+        <selectKey keyProperty="fId" resultType="long" order="BEFORE">
+            SELECT SEQ_SYS_USER as fId FROM DUAL
+        </selectKey>
+        insert into t_warehouse
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fId != null">f_id,</if>
+            <if test="fNo != null and fNo != ''">f_no,</if>
+            <if test="fName != null and fName != ''">f_name,</if>
+            <if test="fAddr != null and fAddr != ''">f_addr,</if>
+            <if test="fTotalgross != null">f_totalgross,</if>
+            <if test="fContacts != null">f_contacts,</if>
+            <if test="fTel != null">f_tel,</if>
+            <if test="fStatus != null">f_status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fId != null">#{fId},</if>
+            <if test="fNo != null and fNo != ''">#{fNo},</if>
+            <if test="fName != null and fName != ''">#{fName},</if>
+            <if test="fAddr != null and fAddr != ''">#{fAddr},</if>
+            <if test="fTotalgross != null">#{fTotalgross},</if>
+            <if test="fContacts != null">#{fContacts},</if>
+            <if test="fTel != null">#{fTel},</if>
+            <if test="fStatus != null">#{fStatus},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTWarehouse" parameterType="TWarehouse">
+        update t_warehouse
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fNo != null and fNo != ''">f_no = #{fNo},</if>
+            <if test="fName != null and fName != ''">f_name = #{fName},</if>
+            <if test="fAddr != null and fAddr != ''">f_addr = #{fAddr},</if>
+            <if test="fTotalgross != null">f_totalgross = #{fTotalgross},</if>
+            <if test="fContacts != null">f_contacts = #{fContacts},</if>
+            <if test="fTel != null">f_tel = #{fTel},</if>
+            <if test="fStatus != null">f_status = #{fStatus},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where f_id = #{fId}
+    </update>
+
+    <delete id="deleteTWarehouseByFId" parameterType="Long">
+        delete from t_warehouse where f_id = #{fId}
+    </delete>
+
+    <delete id="deleteTWarehouseByFIds" parameterType="String">
+        delete from t_warehouse where f_id in
+        <foreach item="fId" collection="array" open="(" separator="," close=")">
+            #{fId}
+        </foreach>
+    </delete>
+</mapper>

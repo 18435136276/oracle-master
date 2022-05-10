@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.mapper.TCorpsMapper">
+
+    <resultMap type="TCorps" id="TCorpsResult">
+        <result property="fId"    column="f_id"    />
+        <result property="fNo"    column="f_no"    />
+        <result property="fCname"    column="f_cname"    />
+        <result property="fName"    column="f_name"    />
+        <result property="fEname"    column="f_ename"    />
+        <result property="fTel"    column="f_tel"    />
+        <result property="fFax"    column="f_fax"    />
+        <result property="fEmail"    column="f_email"    />
+        <result property="fManage"    column="f_manage"    />
+        <result property="fAddr"    column="f_addr"    />
+        <result property="fEaddr"    column="f_eaddr"    />
+        <result property="fProvince"    column="f_province"    />
+        <result property="fCity"    column="f_city"    />
+        <result property="fStltypeid"    column="f_stltypeid"    />
+        <result property="fStldays"    column="f_stldays"    />
+        <result property="fTax"    column="f_tax"    />
+        <result property="fInvtel"    column="f_invtel"    />
+        <result property="fInvaddr"    column="f_invaddr"    />
+        <result property="fBankno"    column="f_bankno"    />
+        <result property="fBankname"    column="f_bankname"    />
+        <result property="fUbankno"    column="f_ubankno"    />
+        <result property="fUbankname"    column="f_ubankname"    />
+        <result property="fStatus"    column="f_status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="fTypename"    column="f_typename"    />
+        <result property="loginAccount"    column="login_account"    />
+        <result property="creditLv"    column="credit_lv"    />
+        <result property="paymentDays"    column="payment_days"    />
+        <result property="carNum"    column="car_num"    />
+        <result property="headOffice"    column="head_office"    />
+        <result property="registerdCapital"    column="registerd_capital"    />
+        <result property="legalPerson"    column="legal_person"    />
+        <result property="insdustry"    column="insdustry"    />
+        <result property="creditNum"    column="credit_num"    />
+        <result property="taxpayerNum"    column="taxpayer_num"    />
+        <result property="industryCommerceNum"    column="industry_commerce_num"    />
+        <result property="organizationNum"    column="organization_num"    />
+        <result property="registerOrganization"    column="register_organization"    />
+        <result property="dateOfEstablishment"    column="date_of_establishment"    />
+        <result property="businessDeadline"    column="business_deadline"    />
+        <result property="businessArea"    column="business_area"    />
+        <result property="annualDate"    column="annual_date"    />
+        <result property="registerdAddress"    column="registerd_address"    />
+        <result property="manageScope"    column="manage_scope"    />
+    </resultMap>
+
+    <sql id="selectTCorpsVo">
+        select f_id, f_no, f_cname, f_name, f_ename, f_tel, f_fax, f_email, f_manage, f_addr, f_eaddr, f_province, f_city, f_stltypeid, f_stldays, f_tax, f_invtel, f_invaddr, f_bankno, f_bankname, f_ubankno, f_ubankname, f_status, del_flag, create_by, create_time, update_by, update_time, remark, f_typename, login_account, credit_lv, payment_days, car_num, head_office, registerd_capital, legal_person, insdustry, credit_num, taxpayer_num, industry_commerce_num, organization_num, register_organization, date_of_establishment, business_deadline, business_area, annual_date, registerd_address, manage_scope from t_corps
+    </sql>
+
+    <select id="selectTCorpsList" parameterType="TCorps" resultMap="TCorpsResult">
+        <include refid="selectTCorpsVo"/>
+        <where>
+            <if test="fNo != null  and fNo != ''"> and f_no = #{fNo}</if>
+            <if test="fCname != null  and fCname != ''"> and f_cname like concat(concat('%', #{fCname}), '%')</if>
+            <if test="fName != null  and fName != ''"> and f_name like concat(concat('%', #{fName}), '%')</if>
+            <if test="fEname != null  and fEname != ''"> and f_ename like concat(concat('%', #{fEname}), '%')</if>
+            <if test="fTel != null  and fTel != ''"> and f_tel = #{fTel}</if>
+            <if test="fFax != null  and fFax != ''"> and f_fax = #{fFax}</if>
+            <if test="fEmail != null  and fEmail != ''"> and f_email = #{fEmail}</if>
+            <if test="fManage != null  and fManage != ''"> and f_manage = #{fManage}</if>
+            <if test="fAddr != null  and fAddr != ''"> and f_addr = #{fAddr}</if>
+            <if test="fEaddr != null  and fEaddr != ''"> and f_eaddr = #{fEaddr}</if>
+            <if test="fProvince != null  and fProvince != ''"> and f_province = #{fProvince}</if>
+            <if test="fCity != null  and fCity != ''"> and f_city = #{fCity}</if>
+            <if test="fStltypeid != null "> and f_stltypeid = #{fStltypeid}</if>
+            <if test="fStldays != null "> and f_stldays = #{fStldays}</if>
+            <if test="fTax != null  and fTax != ''"> and f_tax = #{fTax}</if>
+            <if test="fInvtel != null  and fInvtel != ''"> and f_invtel = #{fInvtel}</if>
+            <if test="fInvaddr != null  and fInvaddr != ''"> and f_invaddr = #{fInvaddr}</if>
+            <if test="fBankno != null  and fBankno != ''"> and f_bankno = #{fBankno}</if>
+            <if test="fBankname != null  and fBankname != ''"> and f_bankname like concat(concat('%', #{fBankname}), '%')</if>
+            <if test="fUbankno != null  and fUbankno != ''"> and f_ubankno = #{fUbankno}</if>
+            <if test="fUbankname != null  and fUbankname != ''"> and f_ubankname like concat(concat('%', #{fUbankname}), '%')</if>
+            <if test="fStatus != null  and fStatus != ''"> and f_status = #{fStatus}</if>
+            <if test="fTypename != null  and fTypename != ''"> and f_typename like concat(concat('%', #{fTypename}), '%')</if>
+            <if test="loginAccount != null  and loginAccount != ''"> and login_account = #{loginAccount}</if>
+            <if test="creditLv != null  and creditLv != ''"> and credit_lv = #{creditLv}</if>
+            <if test="paymentDays != null "> and payment_days = #{paymentDays}</if>
+            <if test="carNum != null "> and car_num = #{carNum}</if>
+            <if test="headOffice != null  and headOffice != ''"> and head_office = #{headOffice}</if>
+            <if test="registerdCapital != null  and registerdCapital != ''"> and registerd_capital = #{registerdCapital}</if>
+            <if test="legalPerson != null  and legalPerson != ''"> and legal_person = #{legalPerson}</if>
+            <if test="insdustry != null  and insdustry != ''"> and insdustry = #{insdustry}</if>
+            <if test="creditNum != null  and creditNum != ''"> and credit_num = #{creditNum}</if>
+            <if test="taxpayerNum != null  and taxpayerNum != ''"> and taxpayer_num = #{taxpayerNum}</if>
+            <if test="industryCommerceNum != null  and industryCommerceNum != ''"> and industry_commerce_num = #{industryCommerceNum}</if>
+            <if test="organizationNum != null  and organizationNum != ''"> and organization_num = #{organizationNum}</if>
+            <if test="registerOrganization != null  and registerOrganization != ''"> and register_organization = #{registerOrganization}</if>
+            <if test="dateOfEstablishment != null "> and date_of_establishment = #{dateOfEstablishment}</if>
+            <if test="businessDeadline != null "> and business_deadline = #{businessDeadline}</if>
+            <if test="businessArea != null  and businessArea != ''"> and business_area = #{businessArea}</if>
+            <if test="annualDate != null "> and annual_date = #{annualDate}</if>
+            <if test="registerdAddress != null  and registerdAddress != ''"> and registerd_address = #{registerdAddress}</if>
+            <if test="manageScope != null  and manageScope != ''"> and manage_scope = #{manageScope}</if>
+        </where>
+    </select>
+
+    <select id="selectTCorpsByFId" parameterType="Long" resultMap="TCorpsResult">
+        <include refid="selectTCorpsVo"/>
+        where f_id = #{fId}
+    </select>
+
+    <insert id="insertTCorps" parameterType="TCorps">
+        <selectKey keyProperty="fId" resultType="long" order="BEFORE">
+            SELECT SEQ_SYS_USER as fId FROM DUAL
+        </selectKey>
+        insert into t_corps
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fId != null">f_id,</if>
+            <if test="fNo != null">f_no,</if>
+            <if test="fCname != null">f_cname,</if>
+            <if test="fName != null and fName != ''">f_name,</if>
+            <if test="fEname != null">f_ename,</if>
+            <if test="fTel != null">f_tel,</if>
+            <if test="fFax != null">f_fax,</if>
+            <if test="fEmail != null">f_email,</if>
+            <if test="fManage != null">f_manage,</if>
+            <if test="fAddr != null">f_addr,</if>
+            <if test="fEaddr != null">f_eaddr,</if>
+            <if test="fProvince != null">f_province,</if>
+            <if test="fCity != null">f_city,</if>
+            <if test="fStltypeid != null">f_stltypeid,</if>
+            <if test="fStldays != null">f_stldays,</if>
+            <if test="fTax != null">f_tax,</if>
+            <if test="fInvtel != null">f_invtel,</if>
+            <if test="fInvaddr != null">f_invaddr,</if>
+            <if test="fBankno != null">f_bankno,</if>
+            <if test="fBankname != null">f_bankname,</if>
+            <if test="fUbankno != null">f_ubankno,</if>
+            <if test="fUbankname != null">f_ubankname,</if>
+            <if test="fStatus != null and fStatus != ''">f_status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="fTypename != null">f_typename,</if>
+            <if test="loginAccount != null">login_account,</if>
+            <if test="creditLv != null">credit_lv,</if>
+            <if test="paymentDays != null">payment_days,</if>
+            <if test="carNum != null">car_num,</if>
+            <if test="headOffice != null">head_office,</if>
+            <if test="registerdCapital != null">registerd_capital,</if>
+            <if test="legalPerson != null">legal_person,</if>
+            <if test="insdustry != null">insdustry,</if>
+            <if test="creditNum != null">credit_num,</if>
+            <if test="taxpayerNum != null">taxpayer_num,</if>
+            <if test="industryCommerceNum != null">industry_commerce_num,</if>
+            <if test="organizationNum != null">organization_num,</if>
+            <if test="registerOrganization != null">register_organization,</if>
+            <if test="dateOfEstablishment != null">date_of_establishment,</if>
+            <if test="businessDeadline != null">business_deadline,</if>
+            <if test="businessArea != null">business_area,</if>
+            <if test="annualDate != null">annual_date,</if>
+            <if test="registerdAddress != null">registerd_address,</if>
+            <if test="manageScope != null">manage_scope,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fId != null">#{fId},</if>
+            <if test="fNo != null">#{fNo},</if>
+            <if test="fCname != null">#{fCname},</if>
+            <if test="fName != null and fName != ''">#{fName},</if>
+            <if test="fEname != null">#{fEname},</if>
+            <if test="fTel != null">#{fTel},</if>
+            <if test="fFax != null">#{fFax},</if>
+            <if test="fEmail != null">#{fEmail},</if>
+            <if test="fManage != null">#{fManage},</if>
+            <if test="fAddr != null">#{fAddr},</if>
+            <if test="fEaddr != null">#{fEaddr},</if>
+            <if test="fProvince != null">#{fProvince},</if>
+            <if test="fCity != null">#{fCity},</if>
+            <if test="fStltypeid != null">#{fStltypeid},</if>
+            <if test="fStldays != null">#{fStldays},</if>
+            <if test="fTax != null">#{fTax},</if>
+            <if test="fInvtel != null">#{fInvtel},</if>
+            <if test="fInvaddr != null">#{fInvaddr},</if>
+            <if test="fBankno != null">#{fBankno},</if>
+            <if test="fBankname != null">#{fBankname},</if>
+            <if test="fUbankno != null">#{fUbankno},</if>
+            <if test="fUbankname != null">#{fUbankname},</if>
+            <if test="fStatus != null and fStatus != ''">#{fStatus},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="fTypename != null">#{fTypename},</if>
+            <if test="loginAccount != null">#{loginAccount},</if>
+            <if test="creditLv != null">#{creditLv},</if>
+            <if test="paymentDays != null">#{paymentDays},</if>
+            <if test="carNum != null">#{carNum},</if>
+            <if test="headOffice != null">#{headOffice},</if>
+            <if test="registerdCapital != null">#{registerdCapital},</if>
+            <if test="legalPerson != null">#{legalPerson},</if>
+            <if test="insdustry != null">#{insdustry},</if>
+            <if test="creditNum != null">#{creditNum},</if>
+            <if test="taxpayerNum != null">#{taxpayerNum},</if>
+            <if test="industryCommerceNum != null">#{industryCommerceNum},</if>
+            <if test="organizationNum != null">#{organizationNum},</if>
+            <if test="registerOrganization != null">#{registerOrganization},</if>
+            <if test="dateOfEstablishment != null">#{dateOfEstablishment},</if>
+            <if test="businessDeadline != null">#{businessDeadline},</if>
+            <if test="businessArea != null">#{businessArea},</if>
+            <if test="annualDate != null">#{annualDate},</if>
+            <if test="registerdAddress != null">#{registerdAddress},</if>
+            <if test="manageScope != null">#{manageScope},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTCorps" parameterType="TCorps">
+        update t_corps
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fNo != null">f_no = #{fNo},</if>
+            <if test="fCname != null">f_cname = #{fCname},</if>
+            <if test="fName != null and fName != ''">f_name = #{fName},</if>
+            <if test="fEname != null">f_ename = #{fEname},</if>
+            <if test="fTel != null">f_tel = #{fTel},</if>
+            <if test="fFax != null">f_fax = #{fFax},</if>
+            <if test="fEmail != null">f_email = #{fEmail},</if>
+            <if test="fManage != null">f_manage = #{fManage},</if>
+            <if test="fAddr != null">f_addr = #{fAddr},</if>
+            <if test="fEaddr != null">f_eaddr = #{fEaddr},</if>
+            <if test="fProvince != null">f_province = #{fProvince},</if>
+            <if test="fCity != null">f_city = #{fCity},</if>
+            <if test="fStltypeid != null">f_stltypeid = #{fStltypeid},</if>
+            <if test="fStldays != null">f_stldays = #{fStldays},</if>
+            <if test="fTax != null">f_tax = #{fTax},</if>
+            <if test="fInvtel != null">f_invtel = #{fInvtel},</if>
+            <if test="fInvaddr != null">f_invaddr = #{fInvaddr},</if>
+            <if test="fBankno != null">f_bankno = #{fBankno},</if>
+            <if test="fBankname != null">f_bankname = #{fBankname},</if>
+            <if test="fUbankno != null">f_ubankno = #{fUbankno},</if>
+            <if test="fUbankname != null">f_ubankname = #{fUbankname},</if>
+            <if test="fStatus != null and fStatus != ''">f_status = #{fStatus},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="fTypename != null">f_typename = #{fTypename},</if>
+            <if test="loginAccount != null">login_account = #{loginAccount},</if>
+            <if test="creditLv != null">credit_lv = #{creditLv},</if>
+            <if test="paymentDays != null">payment_days = #{paymentDays},</if>
+            <if test="carNum != null">car_num = #{carNum},</if>
+            <if test="headOffice != null">head_office = #{headOffice},</if>
+            <if test="registerdCapital != null">registerd_capital = #{registerdCapital},</if>
+            <if test="legalPerson != null">legal_person = #{legalPerson},</if>
+            <if test="insdustry != null">insdustry = #{insdustry},</if>
+            <if test="creditNum != null">credit_num = #{creditNum},</if>
+            <if test="taxpayerNum != null">taxpayer_num = #{taxpayerNum},</if>
+            <if test="industryCommerceNum != null">industry_commerce_num = #{industryCommerceNum},</if>
+            <if test="organizationNum != null">organization_num = #{organizationNum},</if>
+            <if test="registerOrganization != null">register_organization = #{registerOrganization},</if>
+            <if test="dateOfEstablishment != null">date_of_establishment = #{dateOfEstablishment},</if>
+            <if test="businessDeadline != null">business_deadline = #{businessDeadline},</if>
+            <if test="businessArea != null">business_area = #{businessArea},</if>
+            <if test="annualDate != null">annual_date = #{annualDate},</if>
+            <if test="registerdAddress != null">registerd_address = #{registerdAddress},</if>
+            <if test="manageScope != null">manage_scope = #{manageScope},</if>
+        </trim>
+        where f_id = #{fId}
+    </update>
+
+    <delete id="deleteTCorpsByFId" parameterType="Long">
+        delete from t_corps where f_id = #{fId}
+    </delete>
+
+    <delete id="deleteTCorpsByFIds" parameterType="String">
+        delete from t_corps where f_id in
+        <foreach item="fId" collection="array" open="(" separator="," close=")">
+            #{fId}
+        </foreach>
+    </delete>
+</mapper>

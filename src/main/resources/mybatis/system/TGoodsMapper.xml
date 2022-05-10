@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.mapper.TGoodsMapper">
+
+    <resultMap type="TGoods" id="TGoodsResult">
+        <result property="fId"    column="f_id"    />
+        <result property="fNo"    column="f_no"    />
+        <result property="fName"    column="f_name"    />
+        <result property="fEnam"    column="f_enam"    />
+        <result property="fSpecs"    column="f_specs"    />
+        <result property="fPackagespecs"    column="f_packagespecs"    />
+        <result property="fColor"    column="f_color"    />
+        <result property="fStatus"    column="f_status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectTGoodsVo">
+        select f_id, f_no, f_name, f_enam, f_specs, f_packagespecs, f_color, f_status, del_flag, create_by, create_time, update_by, update_time, remark from t_goods
+    </sql>
+
+    <select id="selectTGoodsList" parameterType="TGoods" resultMap="TGoodsResult">
+        <include refid="selectTGoodsVo"/>
+        <where>
+            <if test="fNo != null  and fNo != ''"> and f_no = #{fNo}</if>
+            <if test="fName != null  and fName != ''"> and f_name like concat(concat('%', #{fName}), '%')</if>
+            <if test="fEnam != null  and fEnam != ''"> and f_enam = #{fEnam}</if>
+            <if test="fSpecs != null  and fSpecs != ''"> and f_specs = #{fSpecs}</if>
+            <if test="fPackagespecs != null  and fPackagespecs != ''"> and f_packagespecs = #{fPackagespecs}</if>
+            <if test="fColor != null  and fColor != ''"> and f_color = #{fColor}</if>
+            <if test="fStatus != null  and fStatus != ''"> and f_status = #{fStatus}</if>
+        </where>
+    </select>
+
+    <select id="selectTGoodsByFId" parameterType="Long" resultMap="TGoodsResult">
+        <include refid="selectTGoodsVo"/>
+        where f_id = #{fId}
+    </select>
+
+    <insert id="insertTGoods" parameterType="TGoods">
+        <selectKey keyProperty="fId" resultType="long" order="BEFORE">
+            SELECT SEQ_SYS_USER as fId FROM DUAL
+        </selectKey>
+        insert into t_goods
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fId != null">f_id,</if>
+            <if test="fNo != null and fNo != ''">f_no,</if>
+            <if test="fName != null and fName != ''">f_name,</if>
+            <if test="fEnam != null">f_enam,</if>
+            <if test="fSpecs != null">f_specs,</if>
+            <if test="fPackagespecs != null">f_packagespecs,</if>
+            <if test="fColor != null">f_color,</if>
+            <if test="fStatus != null">f_status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fId != null">#{fId},</if>
+            <if test="fNo != null and fNo != ''">#{fNo},</if>
+            <if test="fName != null and fName != ''">#{fName},</if>
+            <if test="fEnam != null">#{fEnam},</if>
+            <if test="fSpecs != null">#{fSpecs},</if>
+            <if test="fPackagespecs != null">#{fPackagespecs},</if>
+            <if test="fColor != null">#{fColor},</if>
+            <if test="fStatus != null">#{fStatus},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTGoods" parameterType="TGoods">
+        update t_goods
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fNo != null and fNo != ''">f_no = #{fNo},</if>
+            <if test="fName != null and fName != ''">f_name = #{fName},</if>
+            <if test="fEnam != null">f_enam = #{fEnam},</if>
+            <if test="fSpecs != null">f_specs = #{fSpecs},</if>
+            <if test="fPackagespecs != null">f_packagespecs = #{fPackagespecs},</if>
+            <if test="fColor != null">f_color = #{fColor},</if>
+            <if test="fStatus != null">f_status = #{fStatus},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where f_id = #{fId}
+    </update>
+
+    <delete id="deleteTGoodsByFId" parameterType="Long">
+        delete from t_goods where f_id = #{fId}
+    </delete>
+
+    <delete id="deleteTGoodsByFIds" parameterType="String">
+        delete from t_goods where f_id in
+        <foreach item="fId" collection="array" open="(" separator="," close=")">
+            #{fId}
+        </foreach>
+    </delete>
+</mapper>
